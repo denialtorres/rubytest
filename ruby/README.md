@@ -1,4 +1,3 @@
-
 Ruby Programmer - Exercise 1
 =============================
 
