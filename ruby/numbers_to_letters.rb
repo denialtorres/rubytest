@@ -34,3 +34,27 @@ class Traduce
         }
     end
     
+  def convert(number)
+    number = number.to_i
+    if @translations.include?(number)
+      return @translations[number]
+    elsif(100..999).include?(number)
+      number_to_hundreds(number)
+    elsif(1000..9999).include?(number)
+      a = @translations[number/1000]
+      [a, 'thousand', number_to_hundreds(number%1000)].join(' ').strip
+    elsif(10000..99999).include?(number)
+      a = @translations[number/1000]
+      [a, 'thousand', number_to_thousands(number%1000)].join(' ').strip
+    else
+      number_to_tens(number)
+    end
+  end
+  
+   def number_to_tens(number)
+    return @translations[number] if @translations.include?(number)
+    a = @translations[(number%100 - number % 10)]
+    c = @translations[number%10]
+    [a, '',  c].join(' ').strip
+  end
+  
