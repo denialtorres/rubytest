@@ -58,3 +58,21 @@ class Traduce
     [a, '',  c].join(' ').strip
   end
   
+  def number_to_hundreds(number)
+    return number_to_tens(number%100) if number.to_s.length < 3
+    [@translations[number/100], 'hundred', number_to_tens(number%100)].join(' ').strip
+  end
+  
+  def number_to_thousands(number)
+    return number_to_hundreds(number%100) if number.to_s.length < 3
+    [@translations[number/1000], number_to_tens(number%10), 'hundred', number_to_tens(number%100)].join(' ').strip
+  end
+end
+
+
+n = Traduce.new
+puts n.convert('7')
+puts n.convert('42')
+puts n.convert('2001')
+puts n.convert('1999')
+puts n.convert('17999')
